@@ -2,7 +2,7 @@ from tabnanny import verbose
 from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import User
-
+#g
 ACTION_OPTION = (
         ("Sale", "Shitje"),
         ("Rent", "Qera")
