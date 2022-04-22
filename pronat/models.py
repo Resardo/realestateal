@@ -59,7 +59,6 @@ class Property(models.Model):
     documents = models.CharField(verbose_name="Dokumentacioni", help_text="Dokumentat", max_length=255)
     status = models.BooleanField(default=True)
     activity = models.CharField(max_length=20, choices=ACTION_OPTION)
-    property_type = models.CharField(max_length=20,choices=PROPERTY_TYPE)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True)
@@ -72,8 +71,8 @@ class Property(models.Model):
         return self.title
 
 
-class Apartment(models.Model):
-    property_id = models.ForeignKey(Property, on_delete=models.CASCADE, unique=True)
+class Apartment(Property):
+    property_id = models.OneToOneField(Property, on_delete=models.CASCADE, parent_link=True, primary_key=True)
     slug = models.SlugField(max_length=255, unique=True)
     floor = models.IntegerField(default=0)
     room_num = models.IntegerField(default=0)
@@ -85,8 +84,8 @@ class Apartment(models.Model):
         verbose_name_plural = "Apartamentet"
 
 
-class Villa(models.Model):
-    property_id = models.ForeignKey(Property, on_delete=models.CASCADE, unique=True)
+class Villa(Property):
+    property_id = models.OneToOneField(Property, on_delete=models.CASCADE, parent_link=True, primary_key=True)
     slug = models.SlugField(max_length=255, unique=True)
     floors = models.IntegerField(default=1)
     room_num = models.IntegerField(default=1)
@@ -97,8 +96,8 @@ class Villa(models.Model):
         verbose_name = "Vila"
         verbose_name_plural = "Vilat"
 
-class Store(models.Model):
-    property_id = models.ForeignKey(Property, on_delete=models.CASCADE, unique=True)
+class Store(Property):
+    property_id = models.OneToOneField(Property, on_delete=models.CASCADE, parent_link=True, primary_key=True)
     slug = models.SlugField(max_length=255, unique=True)
     floor = models.IntegerField(default=0)
     bath_num = models.IntegerField(default=1)
@@ -107,16 +106,16 @@ class Store(models.Model):
         verbose_name = "Dyqan"
         verbose_name_plural = "Dyqanet"
 
-class Land(models.Model):
-    property_id = models.ForeignKey(Property, on_delete=models.CASCADE, unique=True)
+class Land(Property):
+    property_id = models.OneToOneField(Property, on_delete=models.CASCADE, parent_link=True, primary_key=True)
     slug = models.SlugField(max_length=255, unique=True)
 
     class Meta: 
         verbose_name = "Toke"
         verbose_name_plural = "Tokat"
 
-class Garage(models.Model):
-    property_id = models.ForeignKey(Property, on_delete=models.CASCADE, unique=True)
+class Garage(Property):
+    property_id = models.OneToOneField(Property, on_delete=models.CASCADE, parent_link=True, primary_key=True)
     slug = models.SlugField(max_length=255, unique=True)
     floor = models.IntegerField()
 
