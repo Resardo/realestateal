@@ -1,7 +1,9 @@
 from tabnanny import verbose
 from tkinter import CASCADE
 from django.db import models
+from django.urls import reverse
 from django.contrib.auth.models import User
+
 
 ACTION_OPTION = (
         ("Sale", "Shitje"),
@@ -49,9 +51,10 @@ class District(models.Model):
 
 class Property(models.Model):
     district_id = models.ForeignKey(District, on_delete=models.CASCADE)
+    slug = models.SlugField(max_length=255, unique=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='property_creator')
-    title = models.CharField(verbose_name="Titulli", help_text="Vendos titullin e njoftimit", max_length=500)
-    description = models.CharField(verbose_name="Pershkrimi", help_text="Vendos pershkrimin",max_length=1000)
+    title = models.TextField(verbose_name="Titulli", help_text="Vendos titullin e njoftimit", max_length=500)
+    description = models.TextField(verbose_name="Pershkrimi", help_text="Vendos pershkrimin",max_length=1000)
     address_line = models.CharField(verbose_name="Adresa", help_text="E nevojeshme",max_length=255)
     price = models.IntegerField()
     area = models.IntegerField()
@@ -67,13 +70,15 @@ class Property(models.Model):
         verbose_name = "Prona"
         verbose_name_plural = "Pronat"
 
+    def get_absolute_url(self):
+        return reverse("pronat:property_detail", args=[self.slug])
+
     def __str__(self):
         return self.title
 
 
 class Apartment(Property):
     property_id = models.OneToOneField(Property, on_delete=models.CASCADE, parent_link=True, primary_key=True)
-    slug = models.SlugField(max_length=255, unique=True)
     floor = models.IntegerField(default=0)
     room_num = models.IntegerField(default=0)
     bath_num = models.IntegerField(default=0)
@@ -86,7 +91,6 @@ class Apartment(Property):
 
 class Villa(Property):
     property_id = models.OneToOneField(Property, on_delete=models.CASCADE, parent_link=True, primary_key=True)
-    slug = models.SlugField(max_length=255, unique=True)
     floors = models.IntegerField(default=1)
     room_num = models.IntegerField(default=1)
     bath_num = models.IntegerField(default=1)
@@ -98,7 +102,6 @@ class Villa(Property):
 
 class Store(Property):
     property_id = models.OneToOneField(Property, on_delete=models.CASCADE, parent_link=True, primary_key=True)
-    slug = models.SlugField(max_length=255, unique=True)
     floor = models.IntegerField(default=0)
     bath_num = models.IntegerField(default=1)
 
@@ -108,7 +111,6 @@ class Store(Property):
 
 class Land(Property):
     property_id = models.OneToOneField(Property, on_delete=models.CASCADE, parent_link=True, primary_key=True)
-    slug = models.SlugField(max_length=255, unique=True)
 
     class Meta: 
         verbose_name = "Toke"
@@ -116,7 +118,6 @@ class Land(Property):
 
 class Garage(Property):
     property_id = models.OneToOneField(Property, on_delete=models.CASCADE, parent_link=True, primary_key=True)
-    slug = models.SlugField(max_length=255, unique=True)
     floor = models.IntegerField()
 
     class Meta: 
