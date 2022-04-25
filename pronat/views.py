@@ -1,9 +1,38 @@
+from asyncio.windows_events import NULL
+from itertools import product
 from msilib.schema import Property
+from unicodedata import category
+from django.http import Http404
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, render
-from .models import Property
+from .models import Apartment, Garage, Land, Store, Villa, Property
 
 def properties_all(request):
     properties = Property.objects.prefetch_related("property_image").filter(is_active=True)
     return render(request, "home/index.html", {"properties" : properties})
+
+def property_detail(request, slug):
+    queryset = Apartment.objects.filter(slug=slug, is_active=True)
+    if queryset.exists():
+        property = get_object_or_404(Apartment, slug=slug, is_active=True)
+    else:
+        queryset = Villa.objects.filter(slug=slug, is_active=True)
+        if queryset.exists():
+            property = get_object_or_404(Villa, slug=slug, is_active=True)
+        else:
+            queryset = Land.objects.filter(slug=slug, is_active=True)
+            if queryset.exists():
+                property = get_object_or_404(Land, slug=slug, is_active=True)
+            else:
+                queryset = Store.objects.filter(slug=slug, is_active=True)
+                if queryset.exists():
+                    property = get_object_or_404(Store, slug=slug, is_active=True)
+                else:
+                    queryset = Villa.objects.filter(slug=slug, is_active=True)
+                    if queryset.exists():
+                        property = get_object_or_404(Villa, slug=slug, is_active=True)
+
+    return render(request, 'home/single.html', {"property": property})
+
+
 

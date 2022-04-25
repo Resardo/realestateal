@@ -19,7 +19,7 @@
               <div class="card-body px-0">
                 <p class="card-text">
                   <a class="text-dark text-decoration-none"
-                    href="#">{{ property.title|slice:":50" }}...</a>
+                    href="{{ property.get_absolute_url }}">{{ property.title|slice:":50" }}...</a>
                 </p>
                 <div class="fw-bold">{{property.price}} €</div>
               </div>
