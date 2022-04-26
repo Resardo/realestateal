@@ -11,6 +11,28 @@ def properties_all(request):
     properties = Property.objects.prefetch_related("property_image").filter(is_active=True)
     return render(request, "home/index.html", {"properties" : properties})
 
+
+def land_all(request):
+    properties = Land.objects.prefetch_related("property_image").filter(is_active=True)
+    return render(request, "home/index.html", {"properties" : properties})
+
+def store_all(request):
+    properties = Store.objects.prefetch_related("property_image").filter(is_active=True)
+    return render(request, "home/index.html", {"properties" : properties})
+
+def garage_all(request):
+    properties = Garage.objects.prefetch_related("property_image").filter(is_active=True)
+    return render(request, "home/index.html", {"properties" : properties})
+
+def villa_all(request):
+    properties = Villa.objects.prefetch_related("property_image").filter(is_active=True)
+    return render(request, "home/index.html", {"properties" : properties})
+
+def apartment_all(request):
+    properties = Apartment.objects.prefetch_related("property_image").filter(is_active=True)
+    return render(request, "home/index.html", {"properties" : properties})
+
+
 def property_detail(request, slug):
     queryset = Apartment.objects.filter(slug=slug, is_active=True)
     if queryset.exists():
