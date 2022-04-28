@@ -75,7 +75,8 @@
       <div class="col-12">There are currently no prona active</div>
         {% else %}
           <div class="row row-cols-4 row-cols-sm-2 row-cols-md-5 g-3">
-            {% for property in properties %}
+            {% for property in topProperties|slice:":10" %}
+            
             <div class="col">
               <div class="card border-0">
                 {% for image in property.property_image.all %}
