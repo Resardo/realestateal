@@ -9,9 +9,9 @@ from .models import Apartment, Garage, Land, Store, Villa, Property
 
 def properties_all(request):
     properties = Property.objects.prefetch_related("property_image").filter(is_active=True)
-    print(properties.query)
-    return render(request, "home/properties.html", {"properties" : properties})
-
+    topProperties=Property.objects.prefetch_related("property_image").all().order_by('-views')
+    print(topProperties)
+    return render(request, "home/index.html", {"properties" : properties, "topProperties" : topProperties})
 
 def land_all(request):
     properties = Land.objects.prefetch_related("property_image").filter(is_active=True)
