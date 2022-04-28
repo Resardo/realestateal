@@ -19,3 +19,16 @@
     margin-left: 4px;
 }
 
+.card-img-top{
+    height: 400px;
+    /* object-fit: cover; */
+}
+
+.card-img-top:hover{
+    width: 30px;
+    height: 30px;
+    -webkit-transition: all 1s 1s ease;
+    -moz-transition: all 1s 1s ease;
+    -o-transition: all 1s 1s ease;
+    transition: all 1s 1s ease;
+}

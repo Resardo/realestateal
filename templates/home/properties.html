@@ -17,7 +17,7 @@
             <div class="card mb-4 box-shadow row">
               {% for image in property.property_image.all %}
               {% if image.is_feature%}
-              <img class="card-img-top" src="{{ image.image.url }}" alt="{{ image.image.alt_text }}">
+              <img class="card-img-top img-fluid" src="{{ image.image.url }}" alt="{{ image.image.alt_text }}">
               {% endif %}
               {% endfor %}
               <a class="text-dark text-decoration-none" href="{{ property.get_absolute_url }}">
