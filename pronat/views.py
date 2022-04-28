@@ -13,6 +13,10 @@ def properties_all(request):
     print(topProperties)
     return render(request, "home/index.html", {"properties" : properties, "topProperties" : topProperties})
 
+def properties_list(request):
+    properties = Property.objects.prefetch_related("property_image").filter(is_active=True)
+    return render(request, "home/properties.html", {"properties" : properties})
+
 def land_all(request):
     properties = Land.objects.prefetch_related("property_image").filter(is_active=True)
     return render(request, "home/properties.html", {"properties" : properties})

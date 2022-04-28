@@ -6,6 +6,7 @@ app_name = 'pronat'
 
 urlpatterns = [
     path('', views.properties_all, name="home_page"),
+    path('properties', views.properties_list, name="properties_page"),
     path('property/<slug:slug>', views.property_detail, name = "property_detail"),
     path('apartment', views.apartment_all, name="apartment_all"),
     path('land', views.land_all, name="land_all"),
