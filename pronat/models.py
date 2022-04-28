@@ -102,8 +102,8 @@ class Villa(Property):
 
 class Store(Property):
     property_id = models.OneToOneField(Property, on_delete=models.CASCADE, parent_link=True, primary_key=True)
-    floor = models.IntegerField(default=0)
-    bath_num = models.IntegerField(default=1)
+    floor = models.IntegerField(default=-1)
+    bath_num = models.IntegerField()
 
     class Meta: 
         verbose_name = "Dyqan"

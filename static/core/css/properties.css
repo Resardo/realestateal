@@ -1,0 +1,21 @@
+/* *{
+    border: 1px solid red;
+} */
+
+.card-footer > * {
+    max-height: 20px;
+}
+
+.card-footer{
+    padding-left: 0px;
+    padding-right: 0px;
+    background-color: white;
+}
+.card-body{
+    padding-left: 1px;
+    padding-right: 1px;
+    padding-top: 1px;
+    padding-bottom: 0px;
+    margin-left: 4px;
+}
+
