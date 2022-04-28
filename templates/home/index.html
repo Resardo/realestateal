@@ -71,9 +71,7 @@
     <script src="/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
     <div class="container-fluid pt-4 my-5"> 
-      {% if not properties %}
-      <div class="col-12">There are currently no prona active</div>
-        {% else %}
+      
           <div class="row row-cols-4 row-cols-sm-2 row-cols-md-5 g-3">
             {% for property in topProperties|slice:":10" %}
             
@@ -97,7 +95,36 @@
             {% endfor %}
           </div>
         </div>
-          {% endif %}
+          
+
+          <div class="container-fluid pt-4 my-5"> 
+            {% if not properties %}
+            <div class="col-12">There are currently no prona active</div>
+              {% else %}
+                <div class="row row-cols-4 row-cols-sm-2 row-cols-md-5 g-3">
+                  {% for property in properties%}
+                  
+                  <div class="col">
+                    <div class="card border-0">
+                      {% for image in property.property_image.all %}
+                      {% if image.is_feature%}
+                      <img class="img-fluid" alt="Responsive image" src="{{ image.image.url }}"
+                        alt="{{ image.image.alt_text }}">
+                      {% endif %}
+                      {% endfor %}
+                      <div class="card-body px-0">
+                        <p class="card-text">
+                          <a class="text-dark text-decoration-none"
+                            href="{{ property.get_absolute_url }}">{{ property.title|slice:":50" }}...</a>
+                        </p>
+                        <div class="fw-bold">{{property.price}} €</div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+                {% endif %}
               <hr class="featurette-divider">
 
     <div class="container marketing my-5 ">

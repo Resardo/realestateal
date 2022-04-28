@@ -13,10 +13,7 @@ def properties_all(request):
     print(topProperties)
     return render(request, "home/index.html", {"properties" : properties, "topProperties" : topProperties})
 
-def top10_properties(request):
-    topProperties=Property.objects.all().order_by('-views')
-    print(topProperties.query)
-    return render(request,"home/index.html")
+
 
 
 
