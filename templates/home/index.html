@@ -70,9 +70,9 @@
 
     <script src="/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-    <div class="container-fluid pt-4 my-5"> 
+    <div class="container-fluid pt-4 my-5 "> 
       
-          <div class="row row-cols-4 row-cols-sm-2 row-cols-md-5 g-3">
+          <!-- <div class="row row-cols-4 row-cols-sm-2 row-cols-md-5 g-3 owl-carousel owl-theme">
             {% for property in topProperties|slice:":10" %}
             
             <div class="col">
@@ -94,17 +94,17 @@
             </div>
             {% endfor %}
           </div>
-        </div>
+        </div> -->
           
 
-          <div class="container-fluid pt-4 my-5"> 
+          <div class="container-fluid pt-4 my-5 "> 
             {% if not properties %}
             <div class="col-12">There are currently no prona active</div>
               {% else %}
-                <div class="row row-cols-4 row-cols-sm-2 row-cols-md-5 g-3">
-                  {% for property in properties%}
+                <div class=" owl-carousel owl-theme ">
+                  {% for property in topProperties|slice:":10" %}
                   
-                  <div class="col">
+                  <div class="col ">
                     <div class="card border-0">
                       {% for image in property.property_image.all %}
                       {% if image.is_feature%}
@@ -123,8 +123,9 @@
                   </div>
                   {% endfor %}
                 </div>
-              </div>
+              
                 {% endif %}
+          </div>
               <hr class="featurette-divider">
 
     <div class="container marketing my-5 ">
@@ -198,5 +199,5 @@
     <hr class="featurette-divider">
   </div>
     
-
+ 
     {%endblock %}
