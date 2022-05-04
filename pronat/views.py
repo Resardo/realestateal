@@ -60,3 +60,6 @@ def property_detail(request, slug):
                         property = get_object_or_404(Villa, slug=slug, is_active=True)
 
     return render(request, 'home/single.html', {"property": property})
+
+def contact_page (request):
+    return render(request, 'contact.html')
