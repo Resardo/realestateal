@@ -19,3 +19,22 @@
     margin-left: 4px;
 }
 
+.card-img-top{
+    height: 400px;
+    /* object-fit: cover; */
+}
+
+.card-img-top:hover{
+    transform: scale(1.25);
+    transition: transform .25s ease;
+    /* width: 30px;
+    height: 30px;
+    -webkit-transition: all 1s 1s ease;
+    -moz-transition: all 1s 1s ease;
+    -o-transition: all 1s 1s ease;
+    transition: all 1s 1s ease; */
+}
+
+.card{
+    max-width: 400px;
+}
